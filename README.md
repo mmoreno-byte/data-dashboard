@@ -14,7 +14,7 @@ Aplicacion web para analisis de datos: sube un CSV o Excel y obtén estadisticas
 - **Graficos interactivos** — Barras, Lineas y Tarta (seleccionables por columna)
 - **Tabla de datos** — visualizacion rapida con paginacion
 
-## Instalacion
+## Instalacion local
 
 ### Backend
 
@@ -46,6 +46,41 @@ Abre [http://localhost:5173](http://localhost:5173)
 | DELETE | `/datasets/{dataset_id}` | Eliminar dataset |
 
 Documentacion interactiva disponible en `/docs` (Swagger UI).
+
+## Despliegue en Google Cloud (App Engine)
+
+### Requisitos
+
+- Cuenta de Google Cloud (console.cloud.google.com)
+- Google Cloud SDK instalado (`gcloud`)
+
+### Pasos
+
+1. **Crear proyecto en Google Cloud:**
+   ```bash
+   gcloud projects create data-dashboard-api --name="Data Dashboard API"
+   gcloud config set project data-dashboard-api
+   ```
+
+2. **Habilitar App Engine:**
+   ```bash
+   gcloud app create --region=us-central
+   ```
+
+3. **Desplegar:**
+   ```bash
+   cd backend
+   gcloud app deploy
+   ```
+
+4. **Ver la API en:**
+   ```
+   https://data-dashboard-api.appspot.com/
+   ```
+
+5. **Configurar frontend:** En GitHub, ir a Settings → Secrets and Variables → Variables y crear:
+   - Name: `DATA_DASHBOARD_API_URL`
+   - Value: `https://data-dashboard-api.appspot.com`
 
 ## Autor
 
